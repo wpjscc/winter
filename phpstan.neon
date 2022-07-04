@@ -1,0 +1,31 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - bootstrap
+        - config
+        - modules
+    level: 5
+    excludePaths:
+        # Exclude tests
+        - modules/backend/tests
+        - modules/cms/tests
+        - modules/system/tests
+        # Exclude views
+        - modules/backend/views
+        - modules/cms/views
+        - modules/system/views
+        # Exclude partials
+        - modules/backend/**/partials/**
+        - modules/cms/**/partials/**
+        - modules/system/**/partials/**
+        - modules/system/partials/**
+        # Exclude controller action templates
+        - modules/backend/controllers/*/*.php
+        - modules/cms/controllers/*/*.php
+        - modules/system/controllers/*/*.php
+    databaseMigrationsPath:
+        - modules/backend/database/migrations
+        - modules/cms/database/migrations
+        - modules/system/database/migrations
