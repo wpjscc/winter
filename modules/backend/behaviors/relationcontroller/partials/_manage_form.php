@@ -8,6 +8,7 @@
         ]) ?>
 
             <!-- Passable fields -->
+            <input type="hidden" name="update_record_id" value="<?= $updateRecordId ?? 0 ?>" />
             <input type="hidden" name="manage_id" value="<?= $relationManageId ?>" />
             <input type="hidden" name="_relation_field" value="<?= $relationField ?>" />
             <input type="hidden" name="_relation_mode" value="form" />
@@ -25,7 +26,26 @@
             </div>
 
             <div class="modal-footer">
-                <?= $this->relationMakePartial('manage_form_footer_update') ?>
+                <?php if ($this->readOnly): ?>
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="popup">
+                        <?= e(trans('backend::lang.relation.close')) ?>
+                    </button>
+                <?php else: ?>
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        <?= e(trans('backend::lang.relation.update')) ?>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="popup">
+                        <?= e(trans('backend::lang.relation.cancel')) ?>
+                    </button>
+                <?php endif ?>
             </div>
 
         <?= Form::close() ?>
@@ -40,6 +60,7 @@
 
             <!-- Passable fields -->
             <input type="hidden" name="_relation_field" value="<?= $relationField ?>" />
+            <input type="hidden" name="update_record_id" value="<?= $updateRecordId ?? 0 ?>" />
             <input type="hidden" name="_relation_mode" value="form" />
             <input type="hidden" name="_relation_session_key" value="<?= $relationSessionKey ?>" />
 
@@ -55,12 +76,21 @@
 
             </div>
             <div class="modal-footer">
-                <?= $this->relationMakePartial('manage_form_footer_create') ?>
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    <?= e(trans('backend::lang.relation.create')) ?>
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-default"
+                    data-dismiss="popup">
+                    <?= e(trans('backend::lang.relation.cancel')) ?>
+                </button>
             </div>
         <?= Form::close() ?>
 
     <?php endif ?>
-
 </div>
 
 <script>
